@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MessengerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +23,7 @@ Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('lo
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/logout', [LogoutController::class, 'destroy'])->name('logout');
+    Route::prefix('messenger')->name('messenger.')->group(function () {
+        Route::get('/index', [MessengerController::class, 'index'])->name('index');
+    });
 });
